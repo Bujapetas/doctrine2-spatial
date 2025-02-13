@@ -82,7 +82,7 @@ abstract class AbstractSpatialType extends Type
      * @throws InvalidValueException
      * @throws UnsupportedPlatformException
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         if ($value === null) {
             return $value;
@@ -103,7 +103,7 @@ abstract class AbstractSpatialType extends Type
      *
      * @return string
      */
-    public function convertToPHPValueSQL($sqlExpr, $platform)
+    public function convertToPHPValueSQL($sqlExpr, $platform): string
     {
         return $this->getSpatialPlatform($platform)->convertToPHPValueSQL($this, $sqlExpr);
     }
@@ -116,7 +116,7 @@ abstract class AbstractSpatialType extends Type
      *
      * @return string
      */
-    public function convertToDatabaseValueSQL($sqlExpr, AbstractPlatform $platform)
+    public function convertToDatabaseValueSQL($sqlExpr, AbstractPlatform $platform): string
     {
         return $this->getSpatialPlatform($platform)->convertToDatabaseValueSQL($this, $sqlExpr);
     }
@@ -129,7 +129,7 @@ abstract class AbstractSpatialType extends Type
      *
      * @return mixed
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue($value, AbstractPlatform $platform): mixed
     {
         if (null === $value) {
             return null;
@@ -147,7 +147,7 @@ abstract class AbstractSpatialType extends Type
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return array_search(get_class($this), self::getTypesMap(), true);
     }
@@ -160,7 +160,7 @@ abstract class AbstractSpatialType extends Type
      *
      * @return string
      */
-    public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
+    public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
     {
         return $this->getSpatialPlatform($platform)->getSQLDeclaration($fieldDeclaration);
     }
@@ -172,7 +172,7 @@ abstract class AbstractSpatialType extends Type
      *
      * @return array
      */
-    public function getMappedDatabaseTypes(AbstractPlatform $platform)
+    public function getMappedDatabaseTypes(AbstractPlatform $platform): array
     {
         return $this->getSpatialPlatform($platform)->getMappedDatabaseTypes($this);
     }

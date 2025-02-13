@@ -30,6 +30,7 @@ use Doctrine\ORM\Query\AST\Node;
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
+use Doctrine\ORM\Query\TokenType;
 
 /**
  * Abstract spatial DQL function
@@ -71,18 +72,18 @@ abstract class AbstractSpatialDQLFunction extends FunctionNode
     {
         $lexer = $parser->getLexer();
 
-        $parser->match(Lexer::T_IDENTIFIER);
-        $parser->match(Lexer::T_OPEN_PARENTHESIS);
+        $parser->match(TokenType::T_IDENTIFIER);
+        $parser->match(TokenType::T_OPEN_PARENTHESIS);
 
         $this->geomExpr[] = $parser->ArithmeticPrimary();
 
-        while (count($this->geomExpr) < $this->minGeomExpr || (($this->maxGeomExpr === null || count($this->geomExpr) < $this->maxGeomExpr) && $lexer->lookahead['type'] != Lexer::T_CLOSE_PARENTHESIS)) {
-            $parser->match(Lexer::T_COMMA);
+        while (count($this->geomExpr) < $this->minGeomExpr || (($this->maxGeomExpr === null || count($this->geomExpr) < $this->maxGeomExpr) && $lexer->lookahead['type'] != TokenType::T_CLOSE_PARENTHESIS)) {
+            $parser->match(TokenType::T_COMMA);
 
             $this->geomExpr[] = $parser->ArithmeticPrimary();
         }
 
-        $parser->match(Lexer::T_CLOSE_PARENTHESIS);
+        $parser->match(TokenType::T_CLOSE_PARENTHESIS);
     }
 
     /**
