@@ -67,7 +67,7 @@ abstract class AbstractSpatialDQLFunction extends FunctionNode
     /**
      * @param Parser $parser
      */
-    public function parse(Parser $parser)
+    public function parse(Parser $parser): void
     {
         $lexer = $parser->getLexer();
 
@@ -90,7 +90,7 @@ abstract class AbstractSpatialDQLFunction extends FunctionNode
      *
      * @return string
      */
-    public function getSql(SqlWalker $sqlWalker)
+    public function getSql(SqlWalker $sqlWalker): string
     {
         $this->validatePlatform($sqlWalker->getConnection()->getDatabasePlatform());
 
